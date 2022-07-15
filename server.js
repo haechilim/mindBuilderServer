@@ -2,50 +2,50 @@ const http = require('http');
 const url = require('url');
 const fs = require('fs');
 const mime = require('mime');
-//const DatabaseManager = require('./databaseManager');
+const DatabaseManager = require('./databaseManager');
 const ApiManager = require('./manager/apiManager');
 
 class Server {
     constructor() {
-        //this.databaseManager = new DatabaseManager();
+        this.databaseManager = new DatabaseManager();
         this.apiManager = new ApiManager();
         
-        //this.databaseManager.connect();
+        this.databaseManager.connect();
     }
 
     createServer() {
         http.createServer((request, response) => {
             console.log(request.url);
 
-            // let pathname = this.getPathname(request.url);
-            // let parameters = this.getParameters(request.url);
+            let pathname = this.getPathname(request.url);
+            let parameters = this.getParameters(request.url);
             
-            // if(request.method == "POST") {
-            //     let post = "";
+            if(request.method == "POST") {
+                let post = "";
 
-            //     request.on("data", (data) => post += data);
-            //     request.on("end", () => {
-            //         if(pathname == "/upload/image") {
-            //             let random = "";
+                request.on("data", (data) => post += data);
+                request.on("end", () => {
+                    if(pathname == "/upload/image") {
+                        let random = "";
 
-            //             while(true) {
-            //                 random = Math.random().toString(36).substr(2,11);
+                        while(true) {
+                            random = Math.random().toString(36).substr(2,11);
 
-            //                 if (!fs.existsSync(random)) break;
-            //             }
+                            if (!fs.existsSync(random)) break;
+                        }
 
-            //             let buf = Buffer.from(decodeURIComponent(post),'base64');
-            //             fs.writeFileSync("image/" + random + ".jpg", buf);
+                        let buf = Buffer.from(decodeURIComponent(post),'base64');
+                        fs.writeFileSync("image/" + random + ".jpg", buf);
 
-            //             this.jsonResponse(response, {
-            //                 path: "/image/" + random + ".jpg"
-            //             });
-            //         }
+                        this.jsonResponse(response, {
+                            path: "/image/" + random + ".jpg"
+                        });
+                    }
 
-            //         this.processUrl(pathname, this.getParameters("?" + post), response);
-            //     });
-            // }
-            // else this.processUrl(pathname, parameters, response);
+                    this.processUrl(pathname, this.getParameters("?" + post), response);
+                });
+            }
+            else this.processUrl(pathname, parameters, response);
 
         }).listen(9000);
 
