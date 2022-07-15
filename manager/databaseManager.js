@@ -2,6 +2,8 @@ const mysql = require('mysql');
 
 class DatabaseManager {
     constructor() {
+        this.lastId = 0;
+
         setInterval(() => this.test(), 10800000);
     }
 
@@ -20,6 +22,10 @@ class DatabaseManager {
         this.connection.end();
     }
 
+    init() {
+        this.query('SELECT LAST_INSERT_ID() from postModel limit 1', (error, result) => this.lastId = result);
+    }
+
     userAdd(name, email, callback) {
         this.query('INSERT INTO user(name, email) VALUES("' + name + '", "' + email + '");', callback);
     }
@@ -36,7 +42,7 @@ class DatabaseManager {
         this.query('INSERT INTO postModel(title, userId, explain_, link) VALUES("' + title + '", ' + userId + ', "' + explain + '", "' + link + '");', (error) => {
             for(let i = 0; i < contentsModel.length; i++) {
                 let json = contentsModel[i];
-                this.query('INSERT INTO contentsModel(postId, title, type, link, linkImage) VALUES((select LAST_INSERT_ID() from postModel limit 1), "' + json.title + '", ' + json.type + ', "' + json.link + '", "' + json.linkImage + '");', (error) => console.log(error));
+                this.query('INSERT INTO contentsModel(postId, title, type, link, linkImage) VALUES(' + this.lastId + ', "' + json.title + '", ' + json.type + ', "' + json.link + '", "' + json.linkImage + '");', (error) => console.log(error));
             }
             callback;
         });
