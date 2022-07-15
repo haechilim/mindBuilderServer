@@ -33,6 +33,7 @@ class DatabaseManager {
     }
 
     postModelAdd(title, userId, contentsModel, explain, link, callback) {
+        console.log(title + '", ' + userId + ', "' + explain + '", "' + link);
         this.query('INSERT INTO postModel(title, userId, explain_, link) VALUES("' + title + '", ' + userId + ', "' + explain + '", "' + link + '");', callback);
     }
 

@@ -29,6 +29,7 @@ class Server {
                         let body = decodeURIComponent(post);
                         let json = JSON.parse(body);
 
+                        console.log("a");
                         this.databaseManager.postModelAdd(json.title, json.userId, json.contentsModel, json.explain, json.link, (error) => this.response(response, error));
                     }
                 });
