@@ -11,7 +11,7 @@ class DatabaseManager {
             port: 3306,
             user: 'root',
             password: 'gocl213@',
-            database: 'bookIt'
+            database: 'mindBuilder'
         });
         this.connection.connect();
     }
