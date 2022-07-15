@@ -40,7 +40,7 @@ class Server {
         console.log("server start!");
     }
 
-    static async processUrl(pathname, data, response) {
+    processUrl(pathname, data, response) {
         switch(pathname) {
             case "/api/user/add":
                 this.databaseManager.userAdd(decodeURIComponent(data.name), decodeURIComponent(data.email), (error) => this.response(response, error));
@@ -55,13 +55,7 @@ class Server {
                 break;
 
             case "/api/healing/postModel/read":
-                this.databaseManager.postModelRead(data.id, data.readType, (error, result) => {
-                    for(let i = 0; i < result.length; i++) {
-                        let postModel = result[i];
-
-                        await this.databaseManager.contentsModelRead(postModel.id, (error, result) => postModel.contentsModel = result);
-                    }
-                });
+                this.databaseManager.postModelRead(data.id, data.readType, );
                 break;
 
             default:
