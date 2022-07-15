@@ -28,6 +28,10 @@ class DatabaseManager {
         this.query('SELECT * FROM user WHERE id = ' + id + ';', callback);
     }
 
+    userDelete(id, callback) {
+        this.query('DELETE FROM user WHERE id = ' + id + ';', callback);
+    }
+
     query(query, callback) {
         this.connection.query(query, callback);
     }

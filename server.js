@@ -57,11 +57,15 @@ class Server {
             case "/api/user/add":
                 this.databaseManager.userAdd(decodeURIComponent(data.name), decodeURIComponent(data.email), (error) => this.response(response, error));
                 break;
-
+                
             case "/api/user/read":
                 this.databaseManager.userRead(data.id, (error, result) => this.response(response, error, result));
                 break;
 
+            case "/api/user/delete":
+                this.databaseManager.userDelete(data.id, (error) => this.response(response, error));
+                break;
+                    
             default:
                 this.fileResponse(response, pathname);
                 break;
