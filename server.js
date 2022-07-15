@@ -25,21 +25,11 @@ class Server {
 
                 request.on("data", (data) => post += data);
                 request.on("end", () => {
-                    if(pathname == "/upload/image") {
-                        let random = "";
+                    if(pathname == "/api/healing/postModel/add") {
+                        let body = decodeURIComponent(post);
+                        let json = JSON.parse(body);
 
-                        while(true) {
-                            random = Math.random().toString(36).substr(2,11);
-
-                            if (!fs.existsSync(random)) break;
-                        }
-
-                        let buf = Buffer.from(decodeURIComponent(post),'base64');
-                        fs.writeFileSync("image/" + random + ".jpg", buf);
-
-                        this.jsonResponse(response, {
-                            path: "/image/" + random + ".jpg"
-                        });
+                        this.databaseManager.postModelAdd(json.title, json.userId, json.contentsModel, json.explain, json.link, (error) => this.response(response, error));
                     }
 
                     this.processUrl(pathname, this.getParameters("?" + post), response);
@@ -65,7 +55,7 @@ class Server {
             case "/api/user/delete":
                 this.databaseManager.userDelete(data.id, (error) => this.response(response, error));
                 break;
-                    
+
             default:
                 this.fileResponse(response, pathname);
                 break;
