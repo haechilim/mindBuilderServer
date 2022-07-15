@@ -46,7 +46,7 @@ class DatabaseManager {
         this.query('SELECT * from postModel' + (readType == 0 ? '' : ' WHERE id = ' + id) + ';', callback);
     }
 
-    postModelDelete() {
+    postModelDelete(id, callback) {
         this.query('DELETE FROM postModel WHERE id = ' + id + ';', callback);
     }
 
