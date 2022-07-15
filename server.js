@@ -56,10 +56,23 @@ class Server {
 
             case "/api/healing/postModel/read":
                 this.databaseManager.postModelRead(data.id, data.readType, (error, result) => {
+                    let json = {
+                        id: 1,
+                        title: "",
+                        userId: 1,
+                        contentsModel: [],
+                        explain: "",
+                        link: ""
+                    };
+
                     result.forEach(async (element) => {
                         await this.databaseManager.contentsModelRead(element.id, (error, result) => {
-                            let json = JSON.parse(JSON.stringify(result));
-                            element.contentsModel = json;
+                            json.id = element.id;
+                            json.title = element.title;
+                            json.userId = element.userId;
+                            json.contentsModel = result;
+                            json.explain = element.explain_;
+                            json.link = element.link;
                         });
                     });
 
