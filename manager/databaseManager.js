@@ -32,8 +32,8 @@ class DatabaseManager {
         this.query('DELETE FROM user WHERE id = ' + id + ';', callback);
     }
 
-    postModelAdd(title, userId, contentsModel, explain, link) {
-        this.query('INSERT INTO postModel(title, userId, explain_, link) VALUES("' + title + '", ' + userId + ', "' + explain + '", "' + link + '");', callback);
+    postModelAdd(title, userId, contentsModel, explain, link, callback) {
+        this.query('INxSERT INTO postModel(title, userId, explain_, link) VALUES("' + title + '", ' + userId + ', "' + explain + '", "' + link + '");', callback);
     }
 
     query(query, callback) {
