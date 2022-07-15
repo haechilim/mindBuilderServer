@@ -55,7 +55,7 @@ class Server {
     processUrl(pathname, data, response) {
         switch(pathname) {
             case "/api/user/add":
-                this.databaseManager.userAdd(data.name, data.email, (error) => this.response(response, error));
+                this.databaseManager.userAdd(decodeURIComponent(data.name), decodeURIComponent(data.email), (error) => this.response(response, error));
                 break;
 
             default:
