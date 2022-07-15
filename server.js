@@ -55,7 +55,13 @@ class Server {
                 break;
 
             case "/api/healing/postModel/read":
-                this.databaseManager.postModelRead(data.id, data.readType, );
+                this.databaseManager.postModelRead(data.id, data.readType, (error, result) => {
+                    for(let i = 0; i < result.length; i++) {
+                        let postModel = result[i];
+
+                        await this.databaseManager.contentsModelRead(postModel.id, (error, result) => postModel.contentsModel = result);
+                    }
+                });
                 break;
 
             default:

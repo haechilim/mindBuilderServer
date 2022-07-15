@@ -42,17 +42,11 @@ class DatabaseManager {
         });
     }
 
-    async postModelRead(id, readType, callback) {
-        await this.query('SELECT * from postModel' + (readType == 0 ? '' : ' WHERE id = ' + id) + ';', (error, result) => {
-            for(let i = 0; i < result.length; i++) {
-                let postModel = result[i];
-
-                this.contentsModelRead(postModel.id, (error, result) => postModel.contentsModel = result);
-            }
-        });
+    postModelRead(id, readType, callback) {
+        this.query('SELECT * from postModel' + (readType == 0 ? '' : ' WHERE id = ' + id) + ';', callback);
     }
 
-    contentsModelRead(id, callback) {
+    async contentsModelRead(id, callback) {
         this.query('SELECT * from contentsModel WHERE postId = ' + id + ';', callback);
     }
 
