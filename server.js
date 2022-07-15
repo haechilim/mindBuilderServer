@@ -11,7 +11,6 @@ class Server {
         this.apiManager = new ApiManager();
         
         this.databaseManager.connect();
-        this.databaseManager.init();
     }
 
     createServer() {
