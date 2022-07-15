@@ -31,8 +31,6 @@ class Server {
 
                         this.databaseManager.postModelAdd(json.title, json.userId, json.contentsModel, json.explain, json.link, (error) => this.response(response, error));
                     }
-
-                    this.processUrl(pathname, this.getParameters("?" + post), response);
                 });
             }
             else this.processUrl(pathname, parameters, response);
@@ -57,7 +55,6 @@ class Server {
                 break;
 
             default:
-                this.fileResponse(response, pathname);
                 break;
         }
     }
