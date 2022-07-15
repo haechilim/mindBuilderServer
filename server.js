@@ -76,7 +76,7 @@ class Server {
                         });
                     });
 
-                    this.response(response, error, result);
+                    this.response(response, error, json);
                 });
                 break;
 
