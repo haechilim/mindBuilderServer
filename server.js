@@ -40,7 +40,7 @@ class Server {
         console.log("server start!");
     }
 
-    processUrl(pathname, data, response) {
+    async processUrl(pathname, data, response) {
         switch(pathname) {
             case "/api/user/add":
                 this.databaseManager.userAdd(decodeURIComponent(data.name), decodeURIComponent(data.email), (error) => this.response(response, error));
