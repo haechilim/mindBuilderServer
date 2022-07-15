@@ -13,7 +13,7 @@ class Server {
         this.databaseManager.connect();
     }
 
-    createServer = async() => {
+    createServer() {
         http.createServer((request, response) => {
             console.log(request.url);
 
@@ -40,7 +40,7 @@ class Server {
         console.log("server start!");
     }
 
-    processUrl = async (pathname, data, response) => {
+    static async processUrl(pathname, data, response) {
         switch(pathname) {
             case "/api/user/add":
                 this.databaseManager.userAdd(decodeURIComponent(data.name), decodeURIComponent(data.email), (error) => this.response(response, error));
