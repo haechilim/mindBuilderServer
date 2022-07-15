@@ -33,8 +33,13 @@ class DatabaseManager {
     }
 
     postModelAdd(title, userId, contentsModel, explain, link, callback) {
-        console.log(title + '", ' + userId + ', "' + explain + '", "' + link);
         this.query('INSERT INTO postModel(title, userId, explain_, link) VALUES("' + title + '", ' + userId + ', "' + explain + '", "' + link + '");', callback);
+
+        let array = JSON.parse(contentsModel);
+
+        console.log(contentsModel);
+
+        array.forEach(json => this.query('INSERT INTO contentsModel(title, type, link, linkImage) VALUES("' + json.title + '", ' + json.type + ', "' + json.link + '", "' + json.linkImage + '");', (error) => console.log(error)));
     }
 
     query(query, callback) {
