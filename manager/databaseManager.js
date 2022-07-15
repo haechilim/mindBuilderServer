@@ -24,6 +24,10 @@ class DatabaseManager {
         this.query('INSERT INTO user(name, email) VALUES("' + name + '", "' + email + '");', callback);
     }
 
+    userRead(id, callback) {
+        this.query('SELECT * FROM user WHERE id = ' + id + ';', callback);
+    }
+
     query(query, callback) {
         this.connection.query(query, callback);
     }
