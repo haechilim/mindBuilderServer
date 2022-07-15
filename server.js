@@ -13,7 +13,7 @@ class Server {
         this.databaseManager.connect();
     }
 
-    createServer() {
+    createServer = async() => {
         http.createServer((request, response) => {
             console.log(request.url);
 
