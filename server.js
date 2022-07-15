@@ -73,6 +73,8 @@ class Server {
     }
 
     response(response, error, result) {
+        console.log(error);
+        
         if(result == undefined) result = {success: (error ? false : true)};
         this.jsonResponse(response, error ? [] : result);
     }
