@@ -57,7 +57,7 @@ class Server {
             case "/api/healing/postModel/read":
                 this.databaseManager.postModelRead(data.id, data.readType, (error, result) => {
                     result.forEach(async (element) => {
-                        await this.databaseManager.contentsModelRead(element.id, (error, result) => console.log("**** " + element));
+                        await this.databaseManager.contentsModelRead(element.id, (error, result) => console.log("**** " + element.id));
                     });
 
                     this.response(response, error, result);
