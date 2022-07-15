@@ -56,9 +56,11 @@ class Server {
 
             case "/api/healing/postModel/read":
                 this.databaseManager.postModelRead(data.id, data.readType, (error, result) => {
+                    console.log(result);
                     if(Array.isArray(result)) {
                         result.forEach(element => this.databaseManager.contentsModelRead(element.id, (error, result) => {
                             element.contentsModel = result
+                            console.log(result);
                             this.response(response, error, result);
                         }));
                     }
