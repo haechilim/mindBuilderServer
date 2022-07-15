@@ -42,6 +42,14 @@ class DatabaseManager {
         });
     }
 
+    postModelRead(id, readType, callback) {
+        this.query('SELECT * from postModel' + (readType == 0 ? '' : ' WHERE id = ' + id) + ';', callback);
+    }
+
+    contentsModelRead(id, callback) {
+        this.query('SELECT * from contentsModel WHERE postId = ' + id + ';', callback);
+    }
+
     query(query, callback) {
         this.connection.query(query, callback);
     }

@@ -54,6 +54,17 @@ class Server {
                 this.databaseManager.userDelete(data.id, (error) => this.response(response, error));
                 break;
 
+            case "/api/healing/postModel/read":
+                this.databaseManager.postModelRead(data.id, data.readType, (error, result) => {
+                    if(Array.isArray(result)) {
+                        result.forEach(element => this.databaseManager.contentsModelRead(element.id, (error, result) => element.contentsModel = result));
+                    }
+                    else this.databaseManager.contentsModelRead(element.id, (error, result) => element.contentsModel = result);
+
+                    this.response(response, error, result);
+                });
+                break;
+
             default:
                 break;
         }
