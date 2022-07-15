@@ -55,13 +55,17 @@ class Server {
                 break;
 
             case "/api/healing/postModel/read":
-                this.databaseManager.postModelRead(data.id, data.readType, (error, result) => {
-                    for(let i = 0; i < result.length; i++) {
-                        let postModel = result[i];
+                // this.databaseManager.postModelRead(data.id, data.readType, (error, result) => {
+                //     for(let i = 0; i < result.length; i++) {
+                //         let postModel = result[i];
 
-                        await this.databaseManager.contentsModelRead(postModel.id, (error, result) => postModel.contentsModel = result);
-                    }
-                });
+                //         this.databaseManager.contentsModelRead(postModel.id, (error, result) => postModel.contentsModel = result);
+                //     }
+                // });
+                break;
+
+            case "/api/healing/postModel/delete":
+                this.databaseManager.postModelDelete(data.id, (error) => this.response(response, error));
                 break;
 
             default:

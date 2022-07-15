@@ -46,9 +46,14 @@ class DatabaseManager {
         this.query('SELECT * from postModel' + (readType == 0 ? '' : ' WHERE id = ' + id) + ';', callback);
     }
 
-    async contentsModelRead(id, callback) {
+    postModelDelete() {
+        this.query('DELETE FROM postModel WHERE id = ' + id + ';', callback);
+    }
+
+    contentsModelRead(id, callback) {
         this.query('SELECT * from contentsModel WHERE postId = ' + id + ';', callback);
     }
+
 
     query(query, callback) {
         this.connection.query(query, callback);
