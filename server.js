@@ -59,6 +59,8 @@ class Server {
                     result.forEach(async (element) => {
                         await this.databaseManager.contentsModelRead(element.id, (error, result) => postModel.contentsModel = result);
                     });
+
+                    this.response(response, error, result);
                 });
                 break;
 
